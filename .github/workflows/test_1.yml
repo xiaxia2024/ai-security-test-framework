@@ -1,0 +1,29 @@
+name: AI Security Test
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Security Tests
+      env:
+        # 这里把 GitHub Secret 提供给 tester.py
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: python src/tester.py
