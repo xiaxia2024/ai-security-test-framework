@@ -1,10 +1,11 @@
 import json
 import time
 import openai
+import os
 from datetime import datetime
 
 # 你自行添加 API KEY
-client = openai.OpenAI(api_key="YOUR_KEY")
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def load_tests(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
