@@ -2,9 +2,9 @@ name: AI Security Test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "主要" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "主要" ]
 
 jobs:
   run-tests:
