@@ -7,9 +7,9 @@
 ### tester.py
 手动测试：
 ```
-client = openai.OpenAI(api_key="OPENAI_API_KEY")
+client = openai.OpenAI(api_key="粘贴OPENAI_API_KEY")
 ```
-CI/CD测试：
+CI/CD测试：Settings → Secrets → Actions → New repository secret（粘贴）
 ```
 import os
 
