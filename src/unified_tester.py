@@ -71,7 +71,7 @@ def run_qwen(prompt):
     try:
         resp = requests.post(QWEN_API_URL, json=data, headers=headers, timeout=15)
         resp.raise_for_status()
-        return resp.json()
+        result_json =  resp.json()
         if "result" in result_json and "choices" in result_json["result"]:
             return result_json["result"]["choices"][0]["message"]["content"]
         else:
