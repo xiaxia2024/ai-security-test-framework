@@ -56,7 +56,7 @@ def run_chatgpt(prompt):
 
 def run_qwen(prompt):
     import requests
-    headers = {"Authorization": f"Bearer {DASHSCOPE_API_KEY}"}
+    headers = {"Authorization": f"Bearer {QWEN_API_KEY}"}
     data = {
         "model": "qwen-7b",
         "messages": [{"role": "user", "content": prompt}]
@@ -81,7 +81,7 @@ def run_test(test_file):
 
         # ChatGPT
         result_entry["results"]["chatgpt"] = analyze_response(p, run_chatgpt(p))
-        time.sleep(0.5)  # 避免API限速
+        time.sleep(1)  # 避免API限速
 
         # Qwen
         result_entry["results"]["qwen"] = analyze_response(p, run_qwen(p))
