@@ -21,12 +21,12 @@ client_chatgpt = openai.OpenAI(api_key=OPENAI_API_KEY)
 
 # Qwen API Key / Endpoint
 QWEN_API_KEY = os.getenv("QWEN_API_KEY")
-QWEN_API_URL = "https://api.qwen.ai/v1/chat/completions"
+QWEN_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 
 # 开源 LLM 配置
-OS_MODEL_NAME = "TheBloke/LLaMA-7B-GPTQ"  # 示例，可以替换其他模型
+OS_MODEL_NAME = "TinyLlama/TinyLlama-1.1B-Chat-v0.6"  # 示例，可以替换其他模型
 tokenizer_os = AutoTokenizer.from_pretrained(OS_MODEL_NAME)
-model_os = AutoModelForCausalLM.from_pretrained(OS_MODEL_NAME, device_map="auto")
+model_os = AutoModelForCausalLM.from_pretrained(OS_MODEL_NAME, device_map="cpu")
 
 # --------------------------
 # 测试规则分析
@@ -65,7 +65,7 @@ def run_chatgpt(prompt):
 
 def run_qwen(prompt):
     import requests
-    headers = {"Authorization": f"Bearer {QWEN_API_KEY}"}
+    headers = {"Authorization": f"Bearer {DASHSCOPE_API_KEY}"}
     data = {
         "model": "qwen-7b",
         "messages": [{"role": "user", "content": prompt}]
