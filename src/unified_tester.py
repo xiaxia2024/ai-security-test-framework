@@ -17,7 +17,7 @@ client_chatgpt = openai.OpenAI(api_key=OPENAI_API_KEY)
 
 # Qwen API Key / Endpoint
 QWEN_API_KEY = os.getenv("DASHSCOPE_API_KEY")
-QWEN_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+QWEN_API_URL = "https://qwenapi.aliyun.com/v1/chat/completions"
 
 # --------------------------
 # 测试规则分析
@@ -56,14 +56,26 @@ def run_chatgpt(prompt):
 
 def run_qwen(prompt):
     import requests
-    headers = {"Authorization": f"Bearer {QWEN_API_KEY}"}
+    headers = {
+        "Authorization": f"Bearer {QWEN_API_KEY}",
+        "Content-Type": "application/json"
+    }
     data = {
         "model": "qwen-7b",
-        "messages": [{"role": "user", "content": prompt}]
+        "messages": [
+            {"role": "user", "content": prompt}
+        ],
+        "temperature: 0.7,
+        "max_tokens": 512
     }
     try:
         resp = requests.post(QWEN_API_URL, json=data, headers=headers, timeout=15)
-        return resp.json()["choices"][0]["message"]["content"]
+        resp.raise_for_status()
+        return resp.json()
+        if "result" in result_json and "choices" in result_json["result"]:
+            return result_json["result"]["choices"][0]["message"]["content"]
+        else:
+            return f"Error: Unexpected response format: {result_json}"
     except Exception as e:
         return f"Error: {str(e)}"
 
