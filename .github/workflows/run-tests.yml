@@ -3,7 +3,7 @@ name: Run Unified AI Tests
 on:
   push:
     branches:
-      - main
+      - 主要
   workflow_dispatch:
 
 jobs:
