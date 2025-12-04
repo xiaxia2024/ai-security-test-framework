@@ -16,7 +16,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")  # 在本地或CI/CD中配置环境
 client_chatgpt = openai.OpenAI(api_key=OPENAI_API_KEY)
 
 # Qwen API Key / Endpoint
-QWEN_API_KEY = os.getenv("DASHSCOPE_API_KEY")
+QWEN_API_KEY = os.getenv("QWEN_API_KEY")
 QWEN_API_URL = "https://qwenapi.aliyun.com/v1/chat/completions"
 
 # --------------------------
