@@ -1,0 +1,38 @@
+name: Run Unified AI Tests
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      QWEN_API_KEY: ${{ secrets.QWEN_API_KEY }}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.13"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install openai transformers torch requests
+
+    - name: Run unified tester
+      run: |
+        python unified_tester.py
+
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: results/
