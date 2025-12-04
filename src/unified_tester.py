@@ -65,7 +65,7 @@ def run_qwen(prompt):
         "messages": [
             {"role": "user", "content": prompt}
         ],
-        "temperature: 0.7,
+        "temperature": 0.7,
         "max_tokens": 512
     }
     try:
