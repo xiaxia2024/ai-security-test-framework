@@ -7,10 +7,6 @@ from datetime import datetime
 # ChatGPT
 import openai
 
-# Transformers for Open Source LLMs
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import torch
-
 # --------------------------
 # 配置模型
 # --------------------------
@@ -22,11 +18,6 @@ client_chatgpt = openai.OpenAI(api_key=OPENAI_API_KEY)
 # Qwen API Key / Endpoint
 QWEN_API_KEY = os.getenv("DASHSCOPE_API_KEY")
 QWEN_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
-
-# 开源 LLM 配置
-OS_MODEL_NAME = "TinyLlama/TinyLlama-1.1B-Chat-v0.6"  # 示例，可以替换其他模型
-tokenizer_os = AutoTokenizer.from_pretrained(OS_MODEL_NAME)
-model_os = AutoModelForCausalLM.from_pretrained(OS_MODEL_NAME, device_map="cpu")
 
 # --------------------------
 # 测试规则分析
@@ -76,14 +67,6 @@ def run_qwen(prompt):
     except Exception as e:
         return f"Error: {str(e)}"
 
-def run_os_llm(prompt):
-    try:
-        inputs = tokenizer_os(prompt, return_tensors="pt").to(model_os.device)
-        outputs = model_os.generate(**inputs, max_new_tokens=256)
-        return tokenizer_os.decode(outputs[0], skip_special_tokens=True)
-    except Exception as e:
-        return f"Error: {str(e)}"
-
 # --------------------------
 # 执行测试
 # --------------------------
@@ -102,10 +85,6 @@ def run_test(test_file):
 
         # Qwen
         result_entry["results"]["qwen"] = analyze_response(p, run_qwen(p))
-        time.sleep(0.5)
-
-        # 开源 LLM
-        result_entry["results"]["os_llm"] = analyze_response(p, run_os_llm(p))
         time.sleep(0.5)
 
         results.append(result_entry)
