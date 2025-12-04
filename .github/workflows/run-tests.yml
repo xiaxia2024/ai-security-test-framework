@@ -29,8 +29,7 @@ jobs:
 
     - name: Run unified tester
       run: |
-        cd src
-        python unified_tester.py
+        python src/unified_tester.py
 
     - name: Upload results
       uses: actions/upload-artifact@v4
