@@ -29,6 +29,7 @@ jobs:
 
     - name: Run unified tester
       run: |
+        cd src
         python unified_tester.py
 
     - name: Upload results
