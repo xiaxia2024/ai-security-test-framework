@@ -9,9 +9,11 @@
 pip install openai
 ```
 ### 配置 API Key
-##### Settings → Secrets → Actions → New repository secret（粘贴）
-##### OPENAI_API_KEY
-##### DASHCOPE_API_KEY
+```
+Settings → Secrets → Actions → New repository secret（粘贴）
+OPENAI_API_KEY
+DASHCOPE_API_KEY
+```
 ### 运行测试 tester.py
 手动测：
 ```
@@ -28,5 +30,7 @@ client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 results/
 ```
 ### CI/CD调用多模型(ChatGPT/Qwen)
+```
 src/unified_tester.py
+```
 
